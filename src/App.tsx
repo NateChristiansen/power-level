@@ -2,7 +2,6 @@ import * as React from "react"
 import {
   ChakraProvider,
   VStack,
-  theme,
   Button,
   Card,
   CardBody,
@@ -13,7 +12,16 @@ import {
   StatLabel,
   StatNumber,
   Textarea,
+  extendTheme,
+  type ThemeConfig
 } from "@chakra-ui/react"
+
+const config: ThemeConfig = {
+  initialColorMode: 'dark',
+  useSystemColorMode: false,
+}
+
+const theme = extendTheme({ config });
 
 export const App = () => {
 
