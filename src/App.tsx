@@ -1,38 +1,48 @@
 import * as React from "react"
 import {
   ChakraProvider,
-  Box,
-  Text,
-  Link,
   VStack,
-  Code,
-  Grid,
   theme,
+  Button,
+  Card,
+  CardBody,
+  Center,
+  Container,
+  Heading,
+  Stat,
+  StatLabel,
+  StatNumber,
+  Textarea,
 } from "@chakra-ui/react"
-import { ColorModeSwitcher } from "./ColorModeSwitcher"
-import { Logo } from "./Logo"
 
-export const App = () => (
-  <ChakraProvider theme={theme}>
-    <Box textAlign="center" fontSize="xl">
-      <Grid minH="100vh" p={3}>
-        <ColorModeSwitcher justifySelf="flex-end" />
-        <VStack spacing={8}>
-          <Logo h="40vmin" pointerEvents="none" />
-          <Text>
-            Edit <Code fontSize="xl">src/App.tsx</Code> and save to reload.
-          </Text>
-          <Link
-            color="teal.500"
-            href="https://chakra-ui.com"
-            fontSize="2xl"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn Chakra
-          </Link>
+export const App = () => {
+
+  const [calculated, setCalculated] = React.useState<boolean>();
+
+  return (
+    <ChakraProvider theme={theme}>
+      <Center textAlign="center" fontSize="xl">
+        <VStack mt={'4'}>
+          <Heading>EDH Power Level Calculator</Heading>
+          <Container maxW={'container.md'}>
+            <Textarea placeholder='Enter your decklist here...' h={['calc(40vh)', 'calc(50vh)']} />
+            <Container pl={'0'} mt={'2'} textAlign={'left'}>
+              <Button onClick={() => setCalculated(true)}>Calculate</Button>
+              <Button ml={'2'} onClick={() => setCalculated(false)}>Reset</Button>
+            </Container>
+            {calculated &&
+              <Card mt={'2'}>
+                <CardBody>
+                  <Stat>
+                    <StatLabel>Your deck is calculated to be power level</StatLabel>
+                    <StatNumber>7</StatNumber>
+                  </Stat>
+                </CardBody>
+              </Card>
+            }
+          </Container>
         </VStack>
-      </Grid>
-    </Box>
-  </ChakraProvider>
-)
+      </Center>
+    </ChakraProvider>
+  )
+}
